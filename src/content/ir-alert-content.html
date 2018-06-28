@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content>
+	<p style="line-height: 25px;">{{msg}}</p>
+	<ng-template ngFor let-input [ngForOf]="inputs" let-i="index">
+		<mat-form-field *ngIf="input.type == 'text' || input.type == 'tel' || input.type == 'number' || input.type == 'password'" class="full-width mt-10" dir="ltr" fxFlex="100">
+			<input autocomplete="off" type="{{input.type}}" [(ngModel)]="values[input.name]" dir="ltr" name="{{input.name}}" matInput placeholder="{{input.placeholder}}">
+		</mat-form-field>
+		<mat-form-field *ngIf="input.type == 'textarea'" class="full-width mt-10" dir="ltr" fxFlex="100">
+			<textarea matInput rows="{{input.rows}}" [(ngModel)]="values[input.name]" dir="ltr" name="{{input.name}}" placeholder="{{input.placeholder}}"></textarea>
+		</mat-form-field>
+		<mat-checkbox class="mb-15 display-block mt-10" name="{{input.name}}" [(ngModel)]="values[input.name]" *ngIf="input.type == 'checkbox'">{{input.label}}</mat-checkbox>
+		<h3 *ngIf="input.type == 'radio' && input.label !== undefined && input.label != ''">{{input.label}}</h3>
+		<mat-radio-group style="display: inline-flex;" [style.flex-direction]="input.multiLine !== undefined && input.multiLine ? 'column' : 'row'" class="mb-15 display-block mt-10" name="{{input.name}}" [(ngModel)]="values[input.name]" *ngIf="input.type == 'radio'">
+			<mat-radio-button class="ml-10" [class.mb-10]="input.multiLine !== undefined && input.multiLine" *ngFor="let radio of input.group" value="{{radio.value}}">{{radio.label}}</mat-radio-button>
+		</mat-radio-group>
+		<h1 *ngIf="input.type == 'h1'">{{input.label}}</h1>
+		<h2 *ngIf="input.type == 'h2'">{{input.label}}</h2>
+		<h3 *ngIf="input.type == 'h3'">{{input.label}}</h3>
+		<h4 *ngIf="input.type == 'h4'">{{input.label}}</h4>
+		<h5 *ngIf="input.type == 'h5'">{{input.label}}</h5>
+		<h6 *ngIf="input.type == 'h6'">{{input.label}}</h6>
+	</ng-template>
+</div>
+<div mat-dialog-actions>
+	<button *ngFor="let button of buttons" mat-button (click)="handler(button.handler)">{{button.text}}</button>
+</div>
