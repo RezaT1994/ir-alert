@@ -10,7 +10,7 @@ export class IrAlertService {
 
   constructor(private dialog: MatDialog) {}
 
-  showAlert(config?: IrAlertConfig<any>, buttons?: IrAlertButton[], inputs?: IrAlertInput[]): MatDialogRef<any> {
+  public showAlert(config?: IrAlertConfig<any>, buttons?: IrAlertButton[], inputs?: IrAlertInput[]): MatDialogRef<any> {
 		if (config.message === undefined) {
 			config.message = '';
 		}
@@ -27,17 +27,17 @@ export class IrAlertService {
 	}
 }
 
-interface IrAlertConfig<T> extends MatDialogConfig<any> {
+export interface IrAlertConfig<T> extends MatDialogConfig<any> {
 	title: string;
 	message?: string;
 }
 
-interface IrAlertButton {
+export interface IrAlertButton {
 	text: string;
 	handler?: Function;
 }
 
-interface IrAlertInput {
+export interface IrAlertInput {
 	type: 'text' | 'number' | 'tel' | 'password' | 'textarea' | 'radio' | 'checkbox' | 'h1' | 'h2' | 'h3' | 'h3' | 'h4' | 'h5';
 	name: string;
 	value?: string;
@@ -48,7 +48,7 @@ interface IrAlertInput {
 	group?: IrAlertRadioGroup[];
 }
 
-interface IrAlertRadioGroup {
+export interface IrAlertRadioGroup {
 	value: string;
 	label: string;
 }
