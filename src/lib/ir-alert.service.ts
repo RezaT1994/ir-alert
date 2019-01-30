@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 
-import { IrAlertContent } from '../content/ir-alert-content';
+import { IrAlertContentComponent } from '../content/ir-alert-content';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class IrAlertService {
+	constructor(private dialog: MatDialog) { }
 
-  constructor(private dialog: MatDialog) {}
-
-  public showAlert(config?: IrAlertConfig<any>, buttons?: IrAlertButton[], inputs?: IrAlertInput[]): MatDialogRef<any> {
+	public showAlert(config?: IrAlertConfig<any>, buttons?: IrAlertButton[], inputs?: IrAlertInput[]): MatDialogRef<any> {
 		if (config.message === undefined) {
 			config.message = '';
 		}
@@ -23,7 +22,7 @@ export class IrAlertService {
 			config['data'].inputs = inputs;
 		}
 		config['backdropClass'] = 'alert-overlay';
-		return this.dialog.open(IrAlertContent, config);
+		return this.dialog.open(IrAlertContentComponent, config);
 	}
 }
 
